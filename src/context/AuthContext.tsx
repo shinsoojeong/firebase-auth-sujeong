@@ -8,7 +8,6 @@ export function useAuthContext() {
   return useContext(AuthContext);
 }
 
-
 type AuthProviderProps = {
   children: React.ReactNode;
 }
@@ -23,7 +22,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
     });
 
     return subscribe;
-  }, []);
+  }, [user]);
 
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };

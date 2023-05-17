@@ -1,7 +1,10 @@
+import { Image } from 'react-bootstrap';
+import homeImg from '../firebaseImg.jpg'
+
 export default function HomePage() {
   return (
     <div>
-      home
+      <Image src={homeImg} />
     </div>
   )
 }

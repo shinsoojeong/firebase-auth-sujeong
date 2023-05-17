@@ -1,29 +1,28 @@
 import { useState } from 'react';
 import { firebaseAuth } from '../firebase';
-import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup, Auth, User } from 'firebase/auth';
+import { GoogleAuthProvider, GithubAuthProvider, getRedirectResult, signInWithRedirect, signInWithPopup, User } from 'firebase/auth';
 
 const googleProvider = new GoogleAuthProvider();
 const githubProvider = new GithubAuthProvider();
 
 export default class AuthService {
 
-  login(name: string): (string | User) {
+  login(name: string): void {
     const provider = this.getProvider(name);
+    //const [userData, setUserData] = useState<User | null>(null);
 
     console.log("login start");
-    console.log(name);
-    signInWithPopup(firebaseAuth, provider).then((result) => {
-      console.log("login success end");
-      return result.user;
-    }).catch((error) => {
-      console.log("login catch end");
-      return "error";
-    })
-    console.log("login else out end");
-    return "error";
+    console.log("signInWithRedirect 전: " + name);
+
+    signInWithRedirect(firebaseAuth, provider).then((result) => {
+      console.log("signInWithRedirect: " + result)
+    });
+
+    console.log("signInWithRedirect 후: " + name);
+    //return userData;
   }
 
-  getProvider(name: any) {
+  getProvider(name: string) {
     switch (name) {
       case 'Google':
         return googleProvider;
@@ -34,23 +33,19 @@ export default class AuthService {
     }
   }
 
+  // 처리하거나 지우기
   onAuthChage = (callback: User) => {
-
     console.log("onAuthChage start");
     const [user, setUser] = useState<User | null>(null);
 
     firebaseAuth.onAuthStateChanged(callback => {
-      console.log('구독 실행', user);
+      console.log('구독 실행 onAuthChange', user);
       setUser(user);
     })
     console.log("onAuthChage start");
   }
 
   logout() {
-    console.log("logout start");
-    console.log(firebaseAuth);
     firebaseAuth.signOut();
-    console.log(firebaseAuth);
-    console.log("logout end");
   }
 };

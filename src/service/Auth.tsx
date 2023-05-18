@@ -9,17 +9,7 @@ export default class AuthService {
 
   login(name: string): void {
     const provider = this.getProvider(name);
-    //const [userData, setUserData] = useState<User | null>(null);
-
-    console.log("login start");
-    console.log("signInWithRedirect 전: " + name);
-
-    signInWithRedirect(firebaseAuth, provider).then((result) => {
-      console.log("signInWithRedirect: " + result)
-    });
-
-    console.log("signInWithRedirect 후: " + name);
-    //return userData;
+    signInWithRedirect(firebaseAuth, provider).then((result) => { });
   }
 
   getProvider(name: string) {
@@ -33,7 +23,6 @@ export default class AuthService {
     }
   }
 
-  // 처리하거나 지우기
   onAuthChage = (callback: User) => {
     console.log("onAuthChage start");
     const [user, setUser] = useState<User | null>(null);

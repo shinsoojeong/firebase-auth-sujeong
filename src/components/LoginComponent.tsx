@@ -23,18 +23,17 @@ export default function LoginComponent() {
 
   return (
     <>  
-      <div className='m-10 h-full'>
-        <section className='text-center h-full flex-col'>
+      <div className='container align-items-center justify-content-center'>
+        <div className='text-center flex-col custom'>
           <h1 className='font-bold text-5xl'>LOGIN</h1>
           <br />
-          <div className='mt-20'>
-            <div className="flex-col">
-              <Button className="mb-3 p-4 w-[300px] text-2xl font-semibold flex items-center justify-center m-auto  border-2" variant="primary" size="lg" onClick={() => authLogin.login('Google')}>Google</Button>
-              {' '}
-              <Button className="mb-3 p-4 w-[300px] text-2xl font-semibold flex items-center justify-center m-auto  border-2" variant="danger" size="lg" onClick={() => authLogin.login('Github')}>Github</Button>
-            </div>
+          <div className="d-grid gap-3 col-4 mx-auto">
+            <Button className="btn btn-primary btn-block" variant="light" size="lg" onClick={() => authLogin.login('Google')}>
+              Google</Button>
+            <Button className="btn btn-primary btn-block" variant="light" size="lg" onClick={() => authLogin.login('Github')}>
+              Github</Button>
           </div>
-        </section>
+        </div>
       </div>
     </>
   )
